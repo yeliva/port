@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Desain Minimalis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Visualization & Content Choices: 
+        - Hero: Goal=Inform/Engage. Method=Teks besar, subteks, tombol CTA (HTML/Tailwind). Interaction=Tombol scroll ke portofolio. Justification=Perkenalan cepat dan ajakan langsung.
+        - Tentang Saya: Goal=Inform. Method=Teks deskriptif, mungkin placeholder gambar (HTML/Tailwind). Interaction=Tidak ada interaksi kompleks. Justification=Memberikan konteks tentang desainer.
+        - Portofolio: Goal=Showcase/Organize. Method=Grid kartu proyek responsif (HTML/Tailwind). Interaction=Klik kartu untuk membuka modal dengan detail proyek (gambar lebih besar, deskripsi). Justification=Cara standar dan efektif untuk menampilkan karya visual secara ringkas, dengan opsi untuk melihat detail tanpa meninggalkan halaman.
+        - Kontak: Goal=Enable Communication. Method=Tautan email langsung dan ikon media sosial (HTML/Tailwind). Interaction=Klik untuk membuka mail client atau profil sosial. Justification=Cara termudah dan paling langsung untuk dihubungi.
+        - Library/Method: Vanilla JS untuk navigasi smooth scroll dan fungsionalitas modal. Tailwind CSS untuk semua styling.
+    -->
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #F8FAFC; color: #1E293B; }
+        .nav-active { color: #3B82F6; font-weight: 600; }
+        .hero-bg { background-color: #E0E7FF; } /* Light indigo for a subtle hero background */
+        .card-portfolio { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-portfolio:hover { transform: translateY(-6px); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.15); }
+        .modal-backdrop { transition: opacity 0.3s ease-in-out; }
+        .modal-content { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+        .section-title::after { content: ''; display: block; width: 50px; height: 3px; background-color: #3B82F6; margin: 8px auto 0; }
+        .btn-primary { background-color: #3B82F6; color: white; transition: background-color 0.3s ease; }
+        .btn-primary:hover { background-color: #2563EB; }
+        .btn-secondary { background-color: transparent; color: #3B82F6; border: 2px solid #3B82F6; transition: all 0.3s ease; }
+        .btn-secondary:hover { background-color: #3B82F6; color: white; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="bg-white/90 backdrop-blur-md shadow-sm fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-slate-800">Nama<span class="text-blue-600">Anda</span>.</a>
+                <nav class="hidden md:flex space-x-6 items-center">
+                    <a href="#hero" class="nav-link text-slate-600 hover:text-blue-600 font-medium">Beranda</a>
+                    <a href="#about" class="nav-link text-slate-600 hover:text-blue-600 font-medium">Tentang</a>
+                    <a href="#portfolio" class="nav-link text-slate-600 hover:text-blue-600 font-medium">Portofolio</a>
+                    <a href="#contact" class="nav-link text-slate-600 hover:text-blue-600 font-medium">Kontak</a>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden text-slate-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg py-2">
+            <a href="#hero" class="block nav-link-mobile text-slate-600 hover:text-blue-600 px-6 py-2">Beranda</a>
+            <a href="#about" class="block nav-link-mobile text-slate-600 hover:text-blue-600 px-6 py-2">Tentang</a>
+            <a href="#portfolio" class="block nav-link-mobile text-slate-600 hover:text-blue-600 px-6 py-2">Portofolio</a>
+            <a href="#contact" class="block nav-link-mobile text-slate-600 hover:text-blue-600 px-6 py-2">Kontak</a>
+        </div>
+    </header>
+
+    <section id="hero" class="hero-bg pt-32 pb-20 md:pt-40 md:pb-28 text-center">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl md:text-6xl font-bold text-slate-800 leading-tight mb-4">Desainer Kreatif & Inovatif</h1>
+            <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-8">Saya mengubah ide menjadi pengalaman digital yang menarik dan fungsional. Selamat datang di portofolio saya.</p>
+            <a href="#portfolio" class="btn-primary py-3 px-8 rounded-lg font-semibold text-lg shadow-md hover:shadow-lg">Lihat Karya Saya</a>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 md:py-24 scroll-mt-20">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-3xl font-bold text-center text-slate-800 mb-12">Tentang Saya</h2>
+            <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+                <div class="md:w-1/3 text-center">
+                    <div class="w-48 h-48 md:w-60 md:h-60 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 mx-auto shadow-xl flex items-center justify-center overflow-hidden">
+                        <img src="https://placehold.co/240x240/E0E7FF/3B82F6?text=Foto+Anda" alt="Foto Profil Desainer" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="md:w-2/3 text-slate-600 text-lg leading-relaxed">
+                    <p class="mb-4">Halo! Saya [Nama Anda], seorang desainer dengan hasrat untuk menciptakan solusi visual yang tidak hanya estetis tetapi juga berpusat pada pengguna. Dengan pengalaman lebih dari [X] tahun di industri desain, saya telah mengerjakan berbagai proyek mulai dari branding, desain UI/UX, hingga ilustrasi digital.</p>
+                    <p class="mb-4">Filosofi desain saya adalah kesederhanaan, kejelasan, dan dampak. Saya percaya bahwa desain yang baik adalah desain yang berkomunikasi secara efektif dan memberikan pengalaman yang menyenangkan.</p>
+                    <p>Beberapa keahlian saya meliputi: Figma, Adobe Creative Suite (Photoshop, Illustrator, XD), Desain Responsif, Prototyping, dan Riset Pengguna.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-16 md:py-24 bg-slate-50 scroll-mt-20">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-3xl font-bold text-center text-slate-800 mb-12">Portofolio Karya</h2>
+            <div id="portfolio-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 md:py-24 scroll-mt-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="section-title text-3xl font-bold text-slate-800 mb-8">Mari Terhubung</h2>
+            <p class="text-lg text-slate-600 max-w-xl mx-auto mb-10">Saya selalu terbuka untuk diskusi proyek baru, kolaborasi, atau sekadar bertukar ide. Jangan ragu untuk menghubungi saya.</p>
+            <a href="mailto:emailanda@example.com" class="btn-primary py-3 px-8 rounded-lg font-semibold text-lg shadow-md hover:shadow-lg inline-block">Kirim Email</a>
+            <div class="mt-10 flex justify-center space-x-6">
+                <a href="#" target="_blank" class="text-slate-500 hover:text-blue-600 transition-colors">
+                    <span class="text-3xl">◉</span> <span class="sr-only">LinkedIn</span>
+                </a>
+                <a href="#" target="_blank" class="text-slate-500 hover:text-blue-600 transition-colors">
+                    <span class="text-3xl">◎</span> <span class="sr-only">Instagram</span>
+                </a>
+                <a href="#" target="_blank" class="text-slate-500 hover:text-blue-600 transition-colors">
+                    <span class="text-3xl">◇</span> <span class="sr-only">Dribbble</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-800 text-slate-300 py-8 text-center">
+        <div class="container mx-auto px-6">
+            <p>&copy; <span id="current-year"></span> NamaAnda. Semua Hak Dilindungi.</p>
+        </div>
+    </footer>
+
+    <div id="portfolio-modal" class="fixed inset-0 bg-black bg-opacity-75 z-[60] hidden items-center justify-center p-4 modal-backdrop opacity-0">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col modal-content transform scale-95 opacity-0">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h3 id="modal-title" class="text-2xl font-bold text-slate-800">Judul Proyek</h3>
+                <button id="modal-close-btn" class="text-slate-400 hover:text-slate-800 text-3xl leading-none">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto">
+                <img id="modal-image" src="https://placehold.co/800x500/E0E7FF/3B82F6?text=Gambar+Proyek" alt="Gambar Proyek Detail" class="w-full h-auto rounded-md mb-6 object-contain max-h-[40vh]">
+                <h4 class="text-xl font-semibold text-slate-700 mb-2">Deskripsi Proyek</h4>
+                <p id="modal-description" class="text-slate-600 mb-4 leading-relaxed">Deskripsi detail tentang proyek ini, tantangan yang dihadapi, solusi yang diterapkan, dan hasil yang dicapai.</p>
+                <h4 class="text-xl font-semibold text-slate-700 mb-2">Alat yang Digunakan</h4>
+                <p id="modal-tools" class="text-slate-600 mb-4">Figma, Adobe Illustrator, Photoshop.</p>
+                <a id="modal-link" href="#" target="_blank" class="btn-secondary py-2 px-6 rounded-md inline-block">Lihat Proyek Langsung</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const portfolioGrid = document.getElementById('portfolio-grid');
+            const modal = document.getElementById('portfolio-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalImage = document.getElementById('modal-image');
+            const modalDescription = document.getElementById('modal-description');
+            const modalTools = document.getElementById('modal-tools');
+            const modalLink = document.getElementById('modal-link');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+
+            const portfolioItems = [
+                {
+                    id: 1,
+                    title: "Desain Aplikasi Mobile Banking",
+                    category: "UI/UX Design",
+                    image: "https://placehold.co/600x400/BFDBFE/1E3A8A?text=Proyek+1",
+                    detailImage: "https://placehold.co/800x500/BFDBFE/1E3A8A?text=Detail+Proyek+1",
+                    description: "Merancang ulang pengalaman pengguna untuk aplikasi mobile banking dengan fokus pada kemudahan penggunaan dan tampilan modern. Melibatkan riset pengguna, wireframing, prototyping, dan user testing.",
+                    tools: "Figma, Adobe XD, Miro",
+                    link: "#"
+                },
+                {
+                    id: 2,
+                    title: "Branding untuk Startup Kopi",
+                    category: "Branding",
+                    image: "https://placehold.co/600x400/A5F3FC/0E7490?text=Proyek+2",
+                    detailImage: "https://placehold.co/800x500/A5F3FC/0E7490?text=Detail+Proyek+2",
+                    description: "Mengembangkan identitas visual lengkap untuk sebuah startup kopi, termasuk logo, palet warna, tipografi, dan pedoman merek untuk berbagai media.",
+                    tools: "Adobe Illustrator, Adobe Photoshop",
+                    link: "#"
+                },
+                {
+                    id: 3,
+                    title: "Website E-commerce Fashion",
+                    category: "Web Design",
+                    image: "https://placehold.co/600x400/FBCFE8/9D174D?text=Proyek+3",
+                    detailImage: "https://placehold.co/800x500/FBCFE8/9D174D?text=Detail+Proyek+3",
+                    description: "Desain antarmuka pengguna untuk platform e-commerce fashion yang responsif, dengan fokus pada pengalaman belanja yang mulus dan visual yang menarik.",
+                    tools: "Figma, Sketch, Zeplin",
+                    link: "#"
+                },
+                {
+                    id: 4,
+                    title: "Ilustrasi Editorial Majalah",
+                    category: "Ilustrasi",
+                    image: "https://placehold.co/600x400/D1FAE5/065F46?text=Proyek+4",
+                    detailImage: "https://placehold.co/800x500/D1FAE5/065F46?text=Detail+Proyek+4",
+                    description: "Membuat serangkaian ilustrasi digital untuk artikel utama dalam sebuah majalah gaya hidup, menangkap esensi narasi dengan gaya visual yang unik.",
+                    tools: "Procreate, Adobe Illustrator",
+                    link: "#"
+                },
+                 {
+                    id: 5,
+                    title: "Desain Dashboard Analitik",
+                    category: "UI/UX Design",
+                    image: "https://placehold.co/600x400/DDD6FE/5B21B6?text=Proyek+5",
+                    detailImage: "https://placehold.co/800x500/DDD6FE/5B21B6?text=Detail+Proyek+5",
+                    description: "Merancang dashboard analitik data yang intuitif dan informatif, memungkinkan pengguna untuk dengan mudah memahami tren dan mengambil keputusan berdasarkan data.",
+                    tools: "Figma, Tableau (konsep)",
+                    link: "#"
+                },
+                {
+                    id: 6,
+                    title: "Desain Kemasan Produk Organik",
+                    category: "Desain Grafis",
+                    image: "https://placehold.co/600x400/FEF3C7/9A3412?text=Proyek+6",
+                    detailImage: "https://placehold.co/800x500/FEF3C7/9A3412?text=Detail+Proyek+6",
+                    description: "Menciptakan desain kemasan yang ramah lingkungan dan menarik untuk lini produk makanan organik, menonjolkan nilai alami dan kualitas premium.",
+                    tools: "Adobe Illustrator, Adobe Photoshop, Blender (mockup)",
+                    link: "#"
+                }
+            ];
+
+            portfolioItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card-portfolio bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer group';
+                card.innerHTML = `
+                    <div class="aspect-w-4 aspect-h-3 overflow-hidden">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-slate-800 mb-1">${item.title}</h3>
+                        <p class="text-sm text-blue-600 font-medium">${item.category}</p>
+                    </div>
+                `;
+                card.addEventListener('click', () => openModal(item));
+                portfolioGrid.appendChild(card);
+            });
+
+            function openModal(item) {
+                modalTitle.textContent = item.title;
+                modalImage.src = item.detailImage;
+                modalImage.alt = `Detail ${item.title}`;
+                modalDescription.textContent = item.description;
+                modalTools.textContent = item.tools;
+                if (item.link && item.link !== "#") {
+                    modalLink.href = item.link;
+                    modalLink.classList.remove('hidden');
+                } else {
+                    modalLink.classList.add('hidden');
+                }
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    modal.querySelector('.modal-backdrop').classList.remove('opacity-0');
+                    modal.querySelector('.modal-content').classList.remove('scale-95', 'opacity-0');
+                    modal.querySelector('.modal-content').classList.add('scale-100', 'opacity-100');
+                }, 10);
+                document.body.style.overflow = 'hidden'; 
+            }
+
+            function closeModal() {
+                modal.querySelector('.modal-backdrop').classList.add('opacity-0');
+                modal.querySelector('.modal-content').classList.remove('scale-100', 'opacity-100');
+                modal.querySelector('.modal-content').classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            }
+
+            modalCloseBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link, .nav-link-mobile');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.classList.contains('nav-link-mobile')) {
+                         mobileMenu.classList.add('hidden');
+                    }
+                    const targetId = link.getAttribute('href');
+                    if (targetId.startsWith('#') && targetId.length > 1) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            const headerOffset = document.getElementById('header').offsetHeight;
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                      
+                            window.scrollTo({
+                                 top: offsetPosition,
+                                 behavior: "smooth"
+                            });
+                        }
+                    }
+                });
+            });
+            
+            const header = document.getElementById('header');
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', function() {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > 50) {
+                    header.classList.add('py-3', 'shadow-md');
+                    header.classList.remove('py-4');
+                } else {
+                    header.classList.remove('py-3', 'shadow-md');
+                    header.classList.add('py-4');
+                }
+
+                if (scrollTop > lastScrollTop && scrollTop > 200) { 
+                    header.style.top = `-${header.offsetHeight}px`;
+                } else {
+                    header.style.top = "0";
+                }
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
+
+                let currentSection = '';
+                const sections = document.querySelectorAll('section[id]');
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - header.offsetHeight - 50;
+                    if (pageYOffset >= sectionTop) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                document.querySelectorAll('header nav a').forEach(link => {
+                    link.classList.remove('nav-active');
+                    if (link.getAttribute('href').substring(1) === currentSection) {
+                        link.classList.add('nav-active');
+                    }
+                });
+                 document.querySelectorAll('#mobile-menu a').forEach(link => {
+                    link.classList.remove('text-blue-600', 'font-semibold');
+                    if (link.getAttribute('href').substring(1) === currentSection) {
+                        link.classList.add('text-blue-600', 'font-semibold');
+                    }
+                });
+
+
+            }, false);
+
+        });
+    </script>
+</body>
+</html>
